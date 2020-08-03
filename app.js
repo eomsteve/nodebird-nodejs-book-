@@ -6,12 +6,15 @@ const session =require('express-session');
 const flash =require('connect-flash');
 require('dotenv').config();
 const {sequelize} = require('./models');
+const passport = require('passport');
 
 
+const passportConfig = require('./passport');
 const pageRouter = require('./routes/page.js');
 
 const app =express();
 sequelize.sync();
+passportConfig(passport);
 
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine', 'pug');
@@ -32,6 +35,9 @@ app.use(session({
     }
 }));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 app.use('/',pageRouter);
 
