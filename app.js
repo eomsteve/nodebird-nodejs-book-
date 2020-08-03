@@ -5,11 +5,13 @@ const path =require('path');
 const session =require('express-session');
 const flash =require('connect-flash');
 require('dotenv').config();
+const {sequelize} = require('./models');
 
 
 const pageRouter = require('./routes/page.js');
 
 const app =express();
+sequelize.sync();
 
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine', 'pug');
@@ -18,7 +20,7 @@ app.set('port',process.env.PORT ||8000);
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname,'public')));
 app.use(express.json());
-app.use(express.urlencoded({extend:false}));
+app.use(express.urlencoded({extended:false}));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(session({
     resave:false,
