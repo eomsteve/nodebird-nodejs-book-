@@ -1,5 +1,5 @@
 exports.isLoggedIn = (req,res,next) => {
-    if(req.usAuthenticated()){
+    if(req.isAuthenticated()){
         next();
     }else{
         res.status(403).send('Loggin needed');

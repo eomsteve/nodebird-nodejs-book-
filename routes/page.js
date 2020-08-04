@@ -8,7 +8,7 @@ router.get('/profile',isLoggedIn,(req,res)=>{
 });
 
 router.get('/join',isNotLoggedIn,(req,res)=>{
-    res.render('main',{title:"회원가입 - nodebird",user:req.user,loginError:req.flash('loginError')});
+    res.render('join',{title:"회원가입 - nodebird",user:req.user,loginError:req.flash('loginError')});
 
 })
 
