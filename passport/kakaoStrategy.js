@@ -10,6 +10,8 @@ module.exports = (passport) =>{
 }, async(accessToken,refereshToken,profile,done)=>{
     try{
         const exUser = await User.findOne({ where: {snsId:profile.id, provider:'kakao'}});
+        console.log(profile);
+        
         if(exUser){
             done(null,exUser);
         }else{
